@@ -4,10 +4,27 @@ services:
         image: flask_web:latest
         ports:
             - "5000:5000"
-        volumes:
-            - .:/code
         environment:
             PORT: 1151
+    web2:
+        image: flask_web:latest
+        ports:
+            - "5001:5000"
+        environment:
+            PORT: 1171
+    web3:
+        image: flask_web:latest
+        ports:
+            - "5002:5000"
+        environment:
+            PORT: 1181
     redis:
         image:
             redis
+    nginx:
+        image:
+            nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
