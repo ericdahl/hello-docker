@@ -9,8 +9,7 @@ def hello_world():
     redis_handle = redis.StrictRedis(host='redis', port=6379, db=0)
     c = redis_handle.incr('counter')
 
-    r = str(os.environ)
-    r = 'Hello from ' + os.environ['HOSTNAME'] + ' (count is: ' + str(c) + ')\n'
+    r = 'hello from {} (count is {})\n'.format(os.environ['HOSTNAME'], str(c))
     resp = flask.make_response(r)
     resp.headers['Cache-Control'] = 'public, max-age=5'
     return resp
