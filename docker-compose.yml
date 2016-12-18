@@ -7,6 +7,8 @@ services:
             - "5000:5000"
         environment:
             PORT: 1151
+        volumes:
+            - ./web:/app
     web2:
         image: flask_web:latest
         #build: ./web
@@ -14,6 +16,8 @@ services:
             - "5001:5000"
         environment:
             PORT: 1171
+        volumes:
+            - ./web:/app
     web3:
         image: flask_web:latest
         #build: ./web
@@ -21,6 +25,8 @@ services:
             - "5002:5000"
         environment:
             PORT: 1181
+        volumes:
+            - ./web:/app
     nginx:
         image:
             nginx
