@@ -31,3 +31,7 @@ services:
     redis:
         image:
             redis
+        volumes:
+            - ./redis/redis.conf:/redis.conf
+        command: redis-server /redis.conf
+            
