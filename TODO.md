@@ -1,0 +1,5 @@
+- consul template
+- links
+- customize ports via env?
+- smaller images?
+- 
