@@ -1,8 +1,23 @@
 import flask
 import os
 import redis
+import consul
+
+c = consul.Consul(host='consul')
+ca = c.agent
+
+check = consul.Check.http('http://web:5000/health', '10s')
+
+ca.service.register('web', service_id=os.environ['HOSTNAME'], check = check)
+
+
+print(os.environ)
+
+
 
 app = flask.Flask(__name__)
+
+
 @app.route('/')
 def hello_world():
 
@@ -13,6 +28,10 @@ def hello_world():
     resp = flask.make_response(r)
     resp.headers['Cache-Control'] = 'public, max-age=5'
     return resp
+
+@app.route('/health')
+def health():
+    return 'ok'
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

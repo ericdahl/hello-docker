@@ -1,21 +1,7 @@
 version: '2'
 services:
-    web1:
+    web:
         image: flask_web:latest
-        ports:
-            - "5000"
-        volumes:
-            - ./web:/app
-    web2:
-        image: flask_web:latest
-        #build: ./web
-        ports:
-            - "5000"
-        volumes:
-            - ./web:/app
-    web3:
-        image: flask_web:latest
-        #build: ./web
         ports:
             - "5000"
         volumes:
@@ -33,4 +19,9 @@ services:
         volumes:
             - ./redis/redis.conf:/redis.conf
         command: redis-server /redis.conf
-            
+    consul:
+        image:
+            consul
+        ports:
+            - "8500:8500"
+        command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0
