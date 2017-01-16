@@ -7,8 +7,7 @@ services:
         volumes:
             - ./web:/app
     nginx:
-        image:
-            nginx
+        build: nginx/
         ports:
             - "80:80"
         volumes:
