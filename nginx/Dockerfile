@@ -9,4 +9,7 @@ RUN curl -SsL https://releases.hashicorp.com/consul-template/${VERSION_CONSUL_TE
         > /usr/local/bin/consul-template \
     && chmod +x /usr/local/bin/consul-template
 
+ADD startup.sh /
+RUN chmod +x /startup.sh
 
+CMD ["/startup.sh"]

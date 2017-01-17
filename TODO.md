@@ -1,5 +1,8 @@
 - consul template
-- links
+    - better way to provide ip address to consul from web
+    - better nginx startup script/daemon
+        - basic nginx.conf to start if no upstream available?
+    - reload nginx on file change
 - customize ports via env?
 - smaller images?
 - 

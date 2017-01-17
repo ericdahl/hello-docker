@@ -28,8 +28,8 @@ http {
 
     #gzip  on;
 
-    upstream webupstream {
-        server web:5000;
+    upstream webupstream { {{range service "web"}}
+        server {{.Address}}:{{.Port}};{{end}}
     }
 
     proxy_cache_path /cache levels=1:2 keys_zone=STATIC:10m inactive=24h max_size=1g;

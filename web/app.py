@@ -2,13 +2,17 @@ import flask
 import os
 import redis
 import consul
+import socket
+
+# FIXME: must be a better way
+addr = socket.gethostbyname(socket.gethostname())
 
 c = consul.Consul(host='consul')
 ca = c.agent
 
 check = consul.Check.http('http://web:5000/health', '10s')
-
-ca.service.register('web', service_id=os.environ['HOSTNAME'], check = check)
+#FIXME: dynamic port
+ca.service.register('web', address=addr, port=5000, service_id=os.environ['HOSTNAME'], check = check)
 
 
 print(os.environ)

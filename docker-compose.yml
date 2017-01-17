@@ -6,12 +6,16 @@ services:
             - "5000"
         volumes:
             - ./web:/app
+        links:
+            - consul
     nginx:
         build: nginx/
         ports:
             - "80:80"
         volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/nginx.conf.ctmpl:/etc/nginx/nginx.conf.ctmpl
+        links:
+            - consul
     redis:
         image:
             redis
