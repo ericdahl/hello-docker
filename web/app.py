@@ -10,7 +10,7 @@ addr = socket.gethostbyname(socket.gethostname())
 c = consul.Consul(host='consul')
 ca = c.agent
 
-check = consul.Check.http('http://web:5000/health', '10s')
+check = consul.Check.http('http://' + addr + ':5000/health', '10s')
 #FIXME: dynamic port
 ca.service.register('web', address=addr, port=5000, service_id=os.environ['HOSTNAME'], check = check)
 
