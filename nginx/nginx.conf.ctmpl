@@ -28,20 +28,27 @@ http {
 
     #gzip  on;
 
+    {{ if service "web" }}
     upstream webupstream { {{range service "web"}}
         server {{.Address}}:{{.Port}};{{end}}
     }
+    {{ end }}
 
     proxy_cache_path /cache levels=1:2 keys_zone=STATIC:10m inactive=24h max_size=1g;
     server {
         listen 80;
         server_name localhost;
+
         location / {
+            {{ if service "web"}}
             proxy_pass       http://webupstream;
             proxy_set_header Host      $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_cache STATIC;
             proxy_cache_valid 200 1d;
+            {{ else }}
+            return 503;
+            {{ end }}
         }
     }
 
