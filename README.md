@@ -3,9 +3,9 @@ Example showing the use of `consul-template` to dynamically update nginx load ba
 # Getting started
 
 ```bash
-$ git clone https://github.com/ericdahl/hello-docker.git
+$ git clone https://github.com/ericdahl/hello-docker-consul-template.git
 
-$ cd hello-docker
+$ cd hello-docker-consul-template
 
 $ docker-compose up
 
