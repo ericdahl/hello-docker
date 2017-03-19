@@ -9,7 +9,4 @@ RUN curl -SsL https://releases.hashicorp.com/consul-template/${VERSION_CONSUL_TE
         > /usr/local/bin/consul-template \
     && chmod +x /usr/local/bin/consul-template
 
-ADD startup.sh /
-RUN chmod +x /startup.sh
-
 CMD ["consul-template", "-consul", "consul:8500", "-template", "/etc/nginx/nginx.conf.ctmpl:/etc/nginx/nginx.conf", "-exec", "nginx -g 'daemon off;'"]
